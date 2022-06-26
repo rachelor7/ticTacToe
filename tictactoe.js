@@ -79,8 +79,7 @@ const checkWinner = () => {
     ) {
       // apply winner style to each of the tiles
       for (let c = 0; c < 3; c++) {
-        const tile = document.getElementById(`${r.toString()}-${c.toString()}`);
-        tile.classList.add("winner");
+        setWinnerClass(r, c);
       }
       gameOver = true;
       return;
@@ -95,9 +94,8 @@ const checkWinner = () => {
       board[0][c] !== ""
     ) {
       // apply winner style to each of the tiles
-      for (let i = 0; i < 3; i++) {
-        const tile = document.getElementById(`${i.toString()}-${c.toString()}`);
-        tile.classList.add("winner");
+      for (let r = 0; r < 3; r++) {
+        setWinnerClass(r, c);
       }
       gameOver = true;
       return;
@@ -110,9 +108,9 @@ const checkWinner = () => {
     board[1][1] === board[2][2] &&
     board[0][0] !== ""
   ) {
-    for (let i = 0; i < 3; i++) {
-      const tile = document.getElementById(`${i.toString()}-${i.toString()}`);
-      tile.classList.add("winner");
+    for (let r = 0; r < 3; r++) {
+      let c = r;
+      setWinnerClass(r, c);
     }
     gameOver = true;
     return;
@@ -126,10 +124,12 @@ const checkWinner = () => {
   ) {
     for (let r = 0; r < 3; r++) {
       c = 2 - r;
-      const tile = document.getElementById(`${r.toString()}-${c.toString()}`);
-      tile.classList.add("winner");
+      setWinnerClass(r, c);
     }
   }
 };
 
-const setWinnerClass = (r, c) => {};
+const setWinnerClass = (r, c) => {
+  const tile = document.getElementById(`${r.toString()}-${c.toString()}`);
+  tile.classList.add("winner");
+};
